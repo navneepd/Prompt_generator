@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 10-Minute Web Challenge</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap');
+
+        :root {
+            --bg-color: #0d1117;
+            --text-main: #e6edf3;
+            --text-muted: #8b949e;
+            --accent-blue: #2f81f7;
+            --accent-purple: #a371f7;
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-image:
+                radial-gradient(circle at 15% 50%, rgba(47, 129, 247, 0.08), transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(163, 113, 247, 0.08), transparent 25%);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .glass {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            box-shadow: var(--glass-shadow);
+        }
+
+        section {
+            padding: 6rem 0;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            font-weight: 800;
+            background: linear-gradient(to right, var(--text-main), var(--text-muted));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding-top: 2rem;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #a371f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            max-width: 900px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            max-width: 700px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: #fff;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(163, 113, 247, 0.3);
+        }
+
+        /* Flowchart */
+        .flowchart {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+        }
+
+        .flow-node {
+            padding: 2.5rem 1.5rem;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+
+        .flow-node:hover {
+            transform: translateY(-5px);
+        }
+
+        .flow-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 1.5rem auto;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--glass-border);
+        }
+
+        .flow-icon svg {
+            width: 32px;
+            height: 32px;
+            stroke: var(--accent-blue);
+        }
+
+        .flow-node:nth-child(3) .flow-icon svg {
+            stroke: var(--accent-purple);
+        }
+
+        .flow-node:nth-child(5) .flow-icon svg {
+            stroke: #2ea043;
+        }
+
+        .flow-node h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .flow-node p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .flow-connector {
+            height: 2px;
+            width: 100%;
+            background-image: linear-gradient(to right, var(--text-muted) 50%, transparent 50%);
+            background-size: 12px 2px;
+            background-repeat: repeat-x;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        /* Prompt Studio */
+        .prompt-studio-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .input-form {
+            padding: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .input-group label {
+            font-weight: 600;
+            color: var(--text-main);
+            font-size: 0.95rem;
+        }
+
+        .input-group input {
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 1rem;
+            color: var(--text-main);
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: var(--accent-blue);
+            box-shadow: 0 0 0 2px rgba(47, 129, 247, 0.2);
+        }
+
+        .generate-btn {
+            margin-top: 1rem;
+            align-self: flex-start;
+        }
+
+        .output-panel {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 2.5rem;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .output-panel h3 {
+            margin-bottom: 1rem;
+            color: var(--accent-purple);
+        }
+
+        .output-text {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+            resize: none;
+            width: 100%;
+            flex-grow: 1;
+            outline: none;
+            font-family: monospace;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            padding: 0.5rem 1rem;
+            color: var(--text-main);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s ease;
+            font-weight: 600;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .copy-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        /* Glossary */
+        .glossary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            padding: 3rem 2rem;
+            transition: transform 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+        }
+
+        .card:nth-child(1)::before {
+            background: #e34c26;
+        }
+
+        /* HTML Orange */
+        .card:nth-child(2)::before {
+            background: #264de4;
+        }
+
+        /* CSS Blue */
+        .card:nth-child(3)::before {
+            background: #f0db4f;
+        }
+
+        /* JS Yellow */
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-family: monospace;
+        }
+
+        .card h4 {
+            color: var(--text-main);
+            margin-bottom: 1rem;
+            font-weight: 400;
+            font-size: 1.2rem;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        /* Accordion (Deep Dive) */
+        .accordion {
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .accordion-item {
+            padding: 0;
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .accordion-item summary {
+            padding: 1.5rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-main);
+            /* Large touch-friendly target */
+            min-height: 60px;
+            user-select: none;
+        }
+
+        .accordion-item summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .accordion-item summary::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-item[open] summary::after {
+            transform: rotate(45deg);
+        }
+
+        .accordion-content {
+            padding: 0 2rem 1.5rem 2rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--glass-border);
+            margin-top: 0.5rem;
+            padding-top: 1.5rem;
+        }
+
+        /* Timeline */
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--glass-border);
+        }
+
+        .timeline-step {
+            position: relative;
+            padding-bottom: 3rem;
+            padding-left: 3rem;
+        }
+
+        .timeline-step:last-child {
+            padding-bottom: 0;
+        }
+
+        .timeline-number {
+            position: absolute;
+            left: -1rem;
+            top: 0;
+            width: 32px;
+            height: 32px;
+            background: var(--bg-color);
+            border: 2px solid var(--accent-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            color: var(--accent-blue);
+            z-index: 2;
+        }
+
+        .timeline-content {
+            padding: 2rem;
+        }
+
+        .timeline-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .timeline-content p {
+            color: var(--text-muted);
+            font-size: 1rem;
+        }
+
+        .timeline-step:nth-child(odd) .timeline-number {
+            border-color: var(--accent-blue);
+            color: var(--accent-blue);
+        }
+
+        .timeline-step:nth-child(even) .timeline-number {
+            border-color: var(--accent-purple);
+            color: var(--accent-purple);
+        }
+
+        /* Footer */
+        footer {
+            padding: 4rem 0 6rem 0;
+        }
+
+        .footer-container {
+            padding: 4rem 2rem;
+            text-align: center;
+        }
+
+        .video-placeholder {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto 3rem auto;
+            aspect-ratio: 16 / 9;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 30px rgba(47, 129, 247, 0.1);
+            position: relative;
+        }
+
+        .video-placeholder::after {
+            content: '▶';
+            font-size: 3rem;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .subscribe-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .subscribe-form input {
+            flex-grow: 1;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            padding: 1rem 1.5rem;
+            color: var(--text-main);
+            font-size: 1rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .subscribe-form input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .footer-copyright {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .footer-copyright .copyright-sub {
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Floating Timer Widget */
+        .floating-timer {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .floating-timer:hover {
+            box-shadow: 0 10px 25px rgba(47, 129, 247, 0.2);
+        }
+
+        .timer-display {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-main);
+            letter-spacing: 2px;
+            font-variant-numeric: tabular-nums;
+            min-width: 80px;
+            text-align: center;
+            transition: color 0.3s ease;
+        }
+
+        .timer-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .timer-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            cursor: pointer;
+            transition: background 0.3s ease, transform 0.2s ease;
+            padding: 0;
+        }
+
+        .timer-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.05);
+        }
+
+        .timer-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .timer-times-up {
+            border-color: #10b981;
+            box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .timer-times-up .timer-display {
+            color: #10b981;
+            font-size: 1.2rem;
+            min-width: auto;
+            letter-spacing: 1px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.125rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .prompt-studio-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .flowchart {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .flow-connector {
+                height: 40px;
+                width: 2px;
+                margin: 0 auto;
+                background-image: linear-gradient(to bottom, var(--text-muted) 50%, transparent 50%);
+                background-size: 2px 12px;
+                background-repeat: repeat-y;
+            }
+
+            .subscribe-form {
+                flex-direction: column;
+            }
+
+            .floating-timer {
+                bottom: 1rem;
+                right: 1rem;
+                padding: 0.5rem 1rem;
+                transform: scale(0.9);
+                transform-origin: bottom right;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <section class="hero container">
+        <h1>Build & Deploy a Website in 10 Minutes</h1>
+        <p>Zero code required. Master AI prompts, your IDE, and GitHub Pages.</p>
+        <a href="#prompt-studio" class="cta-btn">Start the Challenge</a>
+    </section>
+
+    <section id="prompt-studio" class="container">
+        <h2>The Prompt Studio</h2>
+        <div class="prompt-studio-grid">
+            <!-- Left Column: Input Form -->
+            <div class="glass input-form">
+                <div class="input-group">
+                    <label for="topicInput">What is your website about?</label>
+                    <input type="text" id="topicInput" placeholder="e.g., A portfolio for a photographer">
+                </div>
+                <div class="input-group">
+                    <label for="vibeInput">What is the vibe or color scheme?</label>
+                    <input type="text" id="vibeInput" placeholder="e.g., Dark and minimalist">
+                </div>
+                <div class="input-group">
+                    <label for="sectionsInput">What sections do you need?</label>
+                    <input type="text" id="sectionsInput" placeholder="e.g., Hero, About, Contact">
+                </div>
+                <button id="generateBtn" class="cta-btn generate-btn">Generate Master Prompt</button>
+            </div>
+
+            <!-- Right Column: Output Display -->
+            <div class="output-panel">
+                <button id="copyBtn" class="copy-btn" title="Copy to clipboard">
+                    <span id="copyIcon" style="display: flex; align-items: center;">
+                        <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M15.75 17.25v3.375c0 .621-.504 1.125-1.125 1.125h-9.75a1.125 1.125 0 01-1.125-1.125V7.875c0-.621.504-1.125 1.125-1.125H6.75a9.06 9.06 0 011.5.124m7.5 10.376h3.375c.621 0 1.125-.504 1.125-1.125V11.25c0-4.46-3.243-8.161-7.5-8.876a9.06 9.06 0 00-1.5-.124H9.375c-.621 0-1.125.504-1.125 1.125v3.5m7.5 10.375H9.375a1.125 1.125 0 01-1.125-1.125v-9.25m12 6.625v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5a3.375 3.375 0 00-3.375-3.375H9.75">
+                            </path>
+                        </svg>
+                    </span>
+                    <span id="copyText" style="display: none; margin-left: 0.5rem;">Copied!</span>
+                </button>
+                <h3>Your Master Prompt</h3>
+                <textarea id="promptOutput" class="output-text"
+                    readonly>Your generated prompt will appear here...</textarea>
+            </div>
+        </div>
+    </section>
+
+    <section id="flowchart" class="container">
+        <h2>How It Works</h2>
+        <div class="flowchart">
+            <div class="glass flow-node">
+                <div class="flow-icon">
+                    <!-- Bot Icon -->
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M8.625 12a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375M21 12c0 4.556-4.03 8.25-9 8.25a9.764 9.764 0 01-2.555-.337A5.972 5.972 0 015.41 20.97a5.969 5.969 0 01-.474-.065 4.48 4.48 0 00.978-2.025c.09-.457-.133-.901-.467-1.226C3.93 16.178 3 14.189 3 12c0-4.556 4.03-8.25 9-8.25s9 3.694 9 8.25z">
+                        </path>
+                    </svg>
+                </div>
+                <h3>1. Prompting AI</h3>
+                <p>Describe your vision. Let AI generate the structure and styling.</p>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="glass flow-node">
+                <div class="flow-icon">
+                    <!-- Code Icon -->
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.25 6.75L22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3l-4.5 16.5"></path>
+                    </svg>
+                </div>
+                <h3>2. The IDE</h3>
+                <p>Paste the generated code into your local editor (like VS Code, Antigravity, Cursor).</p>
+            </div>
+            <div class="flow-connector"></div>
+            <div class="glass flow-node">
+                <div class="flow-icon">
+                    <!-- Cloud Icon -->
+                    <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z">
+                        </path>
+                    </svg>
+                </div>
+                <h3>3. GitHub Deployment</h3>
+                <p>Upload and go live instantly with GitHub Pages.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="glossary" class="container">
+        <h2>Demystifying the Files</h2>
+        <div class="glossary-grid">
+            <div class="glass card">
+                <h3>HTML</h3>
+                <h4>The Structure</h4>
+                <p>Think of it as the skeleton of a house. It defines where the walls, doors, and windows go. It's the
+                    raw content and semantic layout of your page.</p>
+            </div>
+            <div class="glass card">
+                <h3>CSS</h3>
+                <h4>The Paint & Polish</h4>
+                <p>This is the interior design. It determines the colors, spacing, fonts, and layout. It turns the raw
+                    structure into a visually stunning experience.</p>
+            </div>
+            <div class="glass card">
+                <h3>JS</h3>
+                <h4>The Engine</h4>
+                <p>The electricity and plumbing. It brings interactivity making buttons work, fetching data, and
+                    handling animations. It makes the site alive.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="deep-dive" class="container">
+        <h2>Deep Dive: Step-by-Step Guide</h2>
+        <div class="accordion">
+            <details class="glass accordion-item">
+                <summary>Phase 1: The Blueprint</summary>
+                <div class="accordion-content">
+                    <p>You are the architect. Use the Prompt Studio above to define your vision. It automatically generates a strict set of instructions designed specifically for an AI code editor.</p>
+                </div>
+            </details>
+            <details class="glass accordion-item">
+                <summary>Phase 2: The AI IDE (Cursor)</summary>
+                <div class="accordion-content">
+                    <p>An AI IDE is a code editor with a built-in robotic developer. You don't write the code; you just give the orders.</p>
+                    <ol style="margin-left: 1.5rem; margin-top: 1rem;">
+                        <li>Download an AI IDE like Cursor.</li>
+                        <li>Open a new, empty folder on your computer.</li>
+                        <li>Press Cmd+K (or Ctrl+K) to open the AI prompt bar.</li>
+                        <li>Paste your generated Master Prompt and hit enter. The AI will instantly write your index.html file.</li>
+                    </ol>
+                </div>
+            </details>
+            <details class="glass accordion-item">
+                <summary>Phase 3: The Launchpad (GitHub)</summary>
+                <div class="accordion-content">
+                    <p>Now we take your local code and broadcast it to the world using GitHub Pages.</p>
+                    <ol style="margin-left: 1.5rem; margin-top: 1rem;">
+                        <li>Create a free GitHub account and a new Public Repository.</li>
+                        <li>Drag and drop your completed index.html file into the repository.</li>
+                        <li>Go to Settings &gt; Pages.</li>
+                        <li>Change the source branch to 'main' and save. Your live URL will be ready in 60 seconds.</li>
+                    </ol>
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <section id="deployment" class="container">
+        <h2>The Deployment Diagram</h2>
+        <div class="timeline">
+            <div class="timeline-step">
+                <div class="timeline-number">1</div>
+                <div class="glass timeline-content">
+                    <h3>Create a GitHub Repo</h3>
+                    <p>Log into GitHub, click "New Repository," and give it a name like
+                        <code>master-realtor-landing</code>. Leave it public.</p>
+                </div>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-number">2</div>
+                <div class="glass timeline-content">
+                    <h3>Upload Your Files</h3>
+                    <p>Simply drag and drop your local <code>index.html</code> (and any CSS/JS files) from your IDE
+                        directly into the browser window of your new repository.</p>
+                </div>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-number">3</div>
+                <div class="glass timeline-content">
+                    <h3>Navigate to Settings</h3>
+                    <p>Click on the "Settings" tab of your repository, then find the "Pages" menu item on the left
+                        sidebar.</p>
+                </div>
+            </div>
+            <div class="timeline-step">
+                <div class="timeline-number">4</div>
+                <div class="glass timeline-content">
+                    <h3>Go Live</h3>
+                    <p>Under "Build and deployment", set the source branch to <code>main</code>, click "Save", and wait
+                        a minute for GitHub to generate your live URL!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="container">
+        <div class="glass footer-container">
+            <h2>Watch the 10-Minute Build</h2>
+            <div class="video-placeholder">
+            </div>
+            <div class="subscribe-form">
+                <input type="email" placeholder="Enter your email for the next tutorial">
+                <button class="cta-btn">Subscribe</button>
+            </div>
+            <div class="footer-copyright">
+                <p>&copy; 2026 @navneepd. All Rights Reserved.</p>
+                <p class="copyright-sub">Built for The 10-Minute Web Challenge. This site's source code and design are protected.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Timer Widget -->
+    <div id="challengeTimer" class="floating-timer">
+        <div class="timer-display" id="timerDisplay">10:00</div>
+        <div class="timer-controls">
+            <button id="timerPlayPauseBtn" class="timer-btn" title="Start/Pause">
+                <!-- Play Icon Default -->
+                <svg id="iconPlay" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.348a1.125 1.125 0 010 1.971l-11.54 6.347a1.125 1.125 0 01-1.667-.985V5.653z"></path>
+                </svg>
+                <!-- Pause Icon Hidden -->
+                <svg id="iconPause" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="display: none;">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 5.25v13.5m-7.5-13.5v13.5"></path>
+                </svg>
+            </button>
+            <button id="timerResetBtn" class="timer-btn" title="Reset">
+                <svg fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182m0-4.991v4.99"></path>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        // Prompt Studio Logic
+        const generateBtn = document.getElementById('generateBtn');
+        const copyBtn = document.getElementById('copyBtn');
+        const promptOutput = document.getElementById('promptOutput');
+        const copyIcon = document.getElementById('copyIcon');
+        const copyText = document.getElementById('copyText');
+
+        generateBtn.addEventListener('click', () => {
+            const topic = document.getElementById('topicInput').value || 'A professional portfolio';
+            const vibe = document.getElementById('vibeInput').value || 'Dark, minimalist, and modern';
+            const sections = document.getElementById('sectionsInput').value || 'Hero, About, Projects, Contact';
+
+            const masterPrompt = `Act as a Senior Frontend Developer and UI/UX Architect.
+
+CONCEPT REFINEMENT:
+I am providing rough ideas below. Before generating code, auto-fix, expand, and elevate these concepts into a cohesive, professional strategy.
+
+Rough Topic: ${topic}
+Rough Aesthetic: ${vibe}
+Requested Sections: ${sections}
+
+STRICT TECHNICAL REQUIREMENTS:
+1. Architecture: Write all HTML, CSS, and vanilla JS in a single, well-commented file so I can copy-paste it directly into my IDE.
+2. Design System: Establish a CSS variable-based root system for Colors, Typography, and Spacing. Do not hardcode repeated values.
+3. Layout: Use modern CSS Grid and Flexbox for all structural components.
+4. Responsiveness: Enforce 100% mobile responsiveness using media queries. Ensure scaling typography and stacked layouts for screens under 768px.
+5. UX & Performance: Include subtle CSS hover transitions and smooth scrolling for navigation. Strictly avoid heavy 3D transformations or bloated libraries. Use native CSS and inline SVGs.
+
+Output only the consolidated code block without unnecessary markdown explanations.`;
+
+            promptOutput.value = masterPrompt;
+        });
+
+        copyBtn.addEventListener('click', () => {
+            if (promptOutput.value && promptOutput.value !== 'Your generated prompt will appear here...') {
+                navigator.clipboard.writeText(promptOutput.value).then(() => {
+                    const originalIconHTML = copyIcon.innerHTML;
+
+                    // Checkmark icon
+                    copyIcon.innerHTML = `<svg fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"></path></svg>`;
+                    copyText.style.display = 'inline';
+
+                    setTimeout(() => {
+                        copyIcon.innerHTML = originalIconHTML;
+                        copyText.style.display = 'none';
+                    }, 2000);
+                });
+            }
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Floating Timer Logic
+        const timerDisplay = document.getElementById('timerDisplay');
+        const timerPlayPauseBtn = document.getElementById('timerPlayPauseBtn');
+        const timerResetBtn = document.getElementById('timerResetBtn');
+        const iconPlay = document.getElementById('iconPlay');
+        const iconPause = document.getElementById('iconPause');
+        const challengeTimer = document.getElementById('challengeTimer');
+
+        let timerInterval;
+        let timeLeft = 600; // 10 minutes in seconds
+        let isRunning = false;
+
+        function updateTimerDisplay() {
+            if (timeLeft <= 0) {
+                timerDisplay.textContent = "Time's Up!";
+                challengeTimer.classList.add('timer-times-up');
+                iconPlay.style.display = 'block';
+                iconPause.style.display = 'none';
+                return;
+            }
+            
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+
+        function toggleTimer() {
+            if (timeLeft <= 0) return; // Don't play if time's up
+            
+            if (isRunning) {
+                clearInterval(timerInterval);
+                iconPlay.style.display = 'block';
+                iconPause.style.display = 'none';
+            } else {
+                timerInterval = setInterval(() => {
+                    timeLeft--;
+                    updateTimerDisplay();
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        isRunning = false;
+                    }
+                }, 1000);
+                iconPlay.style.display = 'none';
+                iconPause.style.display = 'block';
+            }
+            isRunning = !isRunning;
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            isRunning = false;
+            timeLeft = 600;
+            challengeTimer.classList.remove('timer-times-up');
+            updateTimerDisplay();
+            iconPlay.style.display = 'block';
+            iconPause.style.display = 'none';
+        }
+
+        timerPlayPauseBtn.addEventListener('click', toggleTimer);
+        timerResetBtn.addEventListener('click', resetTimer);
+        
+        // Initialize display
+        updateTimerDisplay();
+    </script>
+</body>
+
+</html>
