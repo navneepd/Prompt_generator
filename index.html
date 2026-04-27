@@ -855,10 +855,12 @@
             <h2>Watch the 10-Minute Build</h2>
             <div class="video-placeholder">
             </div>
-            <div class="subscribe-form">
-                <input type="email" placeholder="Enter your email for the next tutorial">
-                <button class="cta-btn">Subscribe</button>
-            </div>
+            <script>var submitted = false;</script>
+            <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { showSuccessMessage(); }"></iframe>
+            <form action="https://docs.google.com/forms/u/0/d/1Rb7omzjyIgXJmuopTu5iSwKQcR_DTyKmTbl_sabG9ew/formResponse" method="POST" target="hidden_iframe" onsubmit="submitted=true;" class="subscribe-form">
+                <input type="email" name="entry.1199191930" placeholder="Enter your email for the next tutorial" required>
+                <button type="submit" id="subscribeBtn" class="cta-btn" style="transition: all 0.3s ease;">Subscribe</button>
+            </form>
             <div class="footer-copyright">
                 <p>&copy; 2026 @navneepd. All Rights Reserved.</p>
                 <p class="copyright-sub">Built for The 10-Minute Web Challenge. This site's source code and design are protected.</p>
@@ -1012,6 +1014,24 @@ Output only the consolidated code block without unnecessary markdown explanation
         
         // Initialize display
         updateTimerDisplay();
+
+        // Subscribe Form Logic
+        function showSuccessMessage() {
+            const btn = document.getElementById('subscribeBtn');
+            btn.style.backgroundColor = '#10b981';
+            btn.style.borderColor = '#10b981';
+            btn.style.color = '#ffffff';
+            btn.textContent = 'Check your Inbox!';
+            
+            setTimeout(() => {
+                btn.style.backgroundColor = '';
+                btn.style.borderColor = '';
+                btn.style.color = '';
+                btn.textContent = 'Subscribe';
+                submitted = false;
+                document.querySelector('.subscribe-form').reset();
+            }, 3000);
+        }
     </script>
 </body>
 
