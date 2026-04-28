@@ -906,7 +906,10 @@
             const vibe = document.getElementById('vibeInput').value || 'Dark, minimalist, and modern';
             const sections = document.getElementById('sectionsInput').value || 'Hero, About, Projects, Contact';
 
-            const masterPrompt = `Act as a Senior Frontend Developer and UI/UX Architect.
+            const masterPrompt = `[FILE_ACTION: CREATE index.html]
+DO NOT EXPLAIN. DO NOT CHAT. USE YOUR FILE WRITING TOOL TO DIRECTLY CREATE AND SAVE A FILE NAMED 'index.html' IN THE CURRENT DIRECTORY.
+
+Act as an Expert Frontend Developer and UI/UX Architect.
 
 CONCEPT REFINEMENT:
 I am providing rough ideas below. Before generating code, auto-fix, expand, and elevate these concepts into a cohesive, professional strategy.
