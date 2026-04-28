@@ -3,7 +3,7 @@
 Welcome to the official repository for the 10-Minute Web Challenge. This project demonstrates how complete beginners can build and deploy a premium website using AI tools and an AI-native IDE in under 10 minutes.
 
 ### 📺 Watch the Tutorial
-[Insert Link to Your YouTube Video Here]
+[https://www.youtube.com/watch?v=tOmgwi4F-Zc](https://www.youtube.com/watch?v=tOmgwi4F-Zc)
 
 ---
 
